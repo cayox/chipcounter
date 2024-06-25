@@ -12,4 +12,4 @@ class MainController(Controller[MainView]):
         self.view.stack.addWidget(self.view_home)
 
         self.view_home.red_chips_count_widget.set_count(200)
-        self.view.
+        self.view_home.plot_widget.update_data(200)
