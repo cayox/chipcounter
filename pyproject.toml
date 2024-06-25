@@ -1,0 +1,113 @@
+[tool.poetry]
+name = "chip-counter"
+version = "0.1.0"
+description = "Chip counting device"
+authors = ["Nico Päller <n.p.98@hotmail.de>"]
+readme = "README.md"
+package-mode = false
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.dependencies]
+python = ">=3.11,<3.13"
+PyQt6 = "^6.6.1"
+pydantic = "^2.7.0"
+pyqtgraph = "^0.13.7"
+
+[tool.poetry.group.dev.dependencies]
+black = "^24.3.0"
+ruff = "^0.3.5"
+poethepoet = "^0.26.0"
+pyinstaller = "^6.6.0"
+mdpdf = "^0.0.18"
+
+[tool.poe.tasks]
+build = "pyinstaller main.spec --noconfirm"
+docs = "mdpdf -o docs/README.pdf README.md"
+
+[tool.ruff]
+# Same as Black.
+line-length = 88
+
+target-version = "py311"
+
+exclude = [
+]
+
+[tool.ruff.lint]
+select = [
+    "F",
+    "E",
+    "W",
+    "I",
+    "N",
+    "D",
+    "UP",
+    "ANN",
+    "S",
+    "BLE",
+    "B",
+    "A",
+    "COM",
+    "C4",
+    "FA",
+    "ISC",
+    "ICN",
+    "G",
+    "INP",
+    "PIE",
+    "T20",
+    "PYI",
+    "RSE",
+    "RET",
+    "SLF",
+    "SIM",
+    "TID",
+    "TCH",
+    "INT",
+    "ARG",
+    "TD",
+    "PL",
+    "FLY",
+    "TRY",
+    "PERF",
+    "RUF",
+    "DJ"
+]
+ignore = [
+    "ANN101", # ignore type annotation for self
+    "ANN204", # ignore return type annotation for init
+    "E501", # Line too Long -> covered by black
+    "B008", # Function call in argument defualts; because of Query()
+    "A003", # Python builtin shadowing
+    "TRY003",  # Avoid long messages in exceptions
+    "RUF005",  # iterable unpacking instead of concatenation
+    "RUF012",  # Mutable class attributes should be annotated with `typing.ClassVar`
+    "ISC003",  # explicitly concatenated string
+    "ANN002",  # type annotation for args
+    "ANN003",  # type annotation for kwargs
+    "D107",  # missing docstring in __init__
+    "D100",  # missing docstring in module
+    "D104",  # missing docstring in package
+]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["E402", "F401"]
+
+[tool.ruff.lint.flake8-annotations]
+suppress-dummy-args = true
+suppress-none-returning = true
+mypy-init-return = true
+allow-star-arg-any = true
+
+[tool.ruff.lint.pylint]
+max-args = 10
+
+[tool.black]
+line-length = 88
+

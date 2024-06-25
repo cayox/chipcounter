@@ -1,0 +1,32 @@
+[general]
+log_directory = "logs"
+
+[colors]
+background_color = "#f5ebe0"
+text_color = "#0A0A0A"
+
+accent1_light = "#80ffdb"
+accent1 = "#48bfe3"
+accent1_dark = "#4895ef"
+
+accent2_light = "#ff0a54"
+accent2 = "#ff7096"
+accent2_dark = "#e01e37"
+
+icon_color = "#f5ebe0"
+
+white = "#f5ebe0"
+red = "#e01e37"
+
+disabled_light = "#ced4da"
+disabled = "#adb5bd"
+disabled_dark = "#6c757d"
+
+[ui]
+text_counter1 = "Blaue Chips"
+text_counter2 = "Rote Chips"
+text_counter_global = "Gesamt Anzahl"
+
+[counting]
+start_count_blue = 200
+start_count_red = 200

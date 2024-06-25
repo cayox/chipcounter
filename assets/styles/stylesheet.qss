@@ -1,0 +1,75 @@
+* {
+    font-family: 'Lato';
+}
+
+QWidget#MainView {
+    background-color: %white%;
+}
+
+QLabel {
+    color: %text_color%;
+    font-size: 16pt;
+}
+
+QLabel#TimeWidget {
+    font-size: 32pt;
+    font-weight: 600;
+    color: %accent2%;
+}
+
+QLabel#Title {
+    font-family: 'Super Dream';
+    font-size: 48pt;
+    color: %accent2%;
+}
+
+QGroupBox#CountWidget {
+    border: 2px solid %accent1_dark%;
+    padding: 8px;
+    background-color: %accent1%;
+    color: %accent1_light%;
+    border-radius: 8px;
+}
+
+QGroupBox#CountWidget[style_type="accent2"] {
+    border: 2px solid %accent2_dark%;
+    background-color: %accent2%;
+    color: %accent2_light%;
+}
+
+QLabel#CountLabel {
+    font-size: 64pt;
+    color: %disabled_light%;
+}
+
+QLabel#CountLabel[style_type="accent1"] {
+    font-size: 64pt;
+    color: %accent1_light%;
+}
+
+QLabel#CountLabel[style_type="accent2"] {
+    color: %accent2_light%;
+}
+
+QLabel#CountLabel[style_type="description_accent1"] {
+    font-size: 16pt;
+    color: %accent1_light%;
+}
+
+QLabel#CountLabel[style_type="description_accent2"] {
+    font-size: 16pt;
+    color: %accent2_light%;
+}
+
+QLabel#CountLabel[style_type="description_None"] {
+    font-size: 16pt;
+    color: %disabled_dark%;
+}
+
+QGroupBox#SummaryCountWidget {
+    border: 2px solid %disabled_light%;
+    padding: 8px;
+    background-color: %disabled%;
+    color: %white%;
+    border-radius: 8px;
+}
