@@ -23,6 +23,7 @@ class SensorThread(QtCore.QThread):
 
         self.sensor_pin = sensor_pin
         self.previous_state = GPIO.input(self.sensor_pin)
+        log.debug("Current GPIO state (PIN %s): %s", self.sensor_pin, self.previous_state)
         log.info("Initiated Sensor Thread for pin %s", self.sensor_pin)
         self.running = True
 
@@ -30,7 +31,7 @@ class SensorThread(QtCore.QThread):
         while self.running:
             current_state = GPIO.input(self.sensor_pin)
             if current_state != self.previous_state:
-                if current_state == GPIO.LOW:  # Assuming IR sensor is active low
+                if current_state == GPIO.HIGH:  # Assuming IR sensor is active low
                     self.chip_detected.emit()
                 self.previous_state = current_state
 

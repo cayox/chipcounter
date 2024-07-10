@@ -32,12 +32,12 @@ class MainController(Controller[MainView]):
         self.count_manager = CountManager()
         self.count_manager.chip_detected.connect(self.increment_count)
 
-        self.input_manager = ButtonSwitchManager(
-            button1_pin=CONFIG.raspberry_pi.button_reset_pin,
-            button2_pin=CONFIG.raspberry_pi.button_engine_pin,
-            switch_pin1=CONFIG.raspberry_pi.mode_switch_pin1,
-            switch_pin2=CONFIG.raspberry_pi.mode_switch_pin2,
-        )
+        # self.input_manager = ButtonSwitchManager(
+        #     button1_pin=CONFIG.raspberry_pi.button_reset_pin,
+        #     button2_pin=CONFIG.raspberry_pi.button_engine_pin,
+        #     switch_pin1=CONFIG.raspberry_pi.mode_switch_pin1,
+        #     switch_pin2=CONFIG.raspberry_pi.mode_switch_pin2,
+        # )
 
         self.increment_count()
 
