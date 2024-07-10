@@ -19,7 +19,9 @@ class CountingConfig(BaseModel):
 
 class RaspberryPiConfig(BaseModel):
     sensor_pin1: int
+    ctrl_sensor_pin1: int
     sensor_pin2: int
+    ctrl_sensor_pin2: int
     motor_pin: int
 
     button_engine_pin: int

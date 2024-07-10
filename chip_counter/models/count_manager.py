@@ -76,6 +76,18 @@ class CountManager(QtCore.QObject):
             lambda: GPIO.output(CONFIG.raspberry_pi.motor_pin, GPIO.LOW),
         )
 
+    def activate_ctrl_led(self, chip_type: str):
+        if chip_type == "red_chips":
+            pin = CONFIG.raspberry_pi.ctrl_sensor_pin1
+        else:
+            pin = CONFIG.raspberry_pi.ctrl_sensor_pin2
+
+        GPIO.output(pin, GPIO.HIGH)
+        QtCore.QTimer.singleShot(
+            100,
+            lambda: GPIO.output(pin, GPIO.LOW),
+        )
+
     def cleanup(self):
         self.sensor1_thread.stop()
         self.sensor2_thread.stop()
@@ -92,6 +104,8 @@ class CountManager(QtCore.QObject):
         log.debug("Red Chip detected")
 
     def _chip_detected(self, chip_type: str):
+        self.activate_ctrl_led(chip_type)
+
         hour = datetime.datetime.now().hour
         self.count_history.loc[self.count_history["hour"] == hour, chip_type] += 1
 
