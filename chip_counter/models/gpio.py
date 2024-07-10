@@ -1,5 +1,6 @@
 from chip_counter.config import CONFIG
 import logging
+import io
 
 log = logging.getLogger(__name__)
 
@@ -11,6 +12,9 @@ class MockGPIO:
     LOW = 0
     HIGH = 1
     PUD_UP = "PUD_UP"
+    FALLING = 1
+    RISING = 2
+    BOTH = 3
 
     def __init__(self):
         self.pin_state = {}
@@ -30,14 +34,17 @@ class MockGPIO:
     def cleanup(self) -> None:
         self.pin_state = {}
 
+    def add_event_detect(self, *args, **kwargs):
+        pass
+
 
 def is_raspberry_pi() -> bool:
     try:
         with io.open("/sys/firmware/devicetree/base/model", "r") as m:
             if "raspberry pi" in m.read().lower():
                 return True
-    except Exception:
-        pass
+    except Exception as exc:
+        log.exception("Error when defining system platform", exc_info=exc)
     return False
 
 
