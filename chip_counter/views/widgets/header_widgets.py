@@ -2,6 +2,7 @@ from PyQt6 import QtCore, QtWidgets, QtGui
 from typing import Literal, Any
 import datetime
 
+
 class HeaderLabel(QtWidgets.QLabel):
     """Label that is styled as a header in QSS stylesheet.
 
@@ -34,11 +35,11 @@ class TimeWidget(HeaderLabel):
     """
 
     def __init__(
-            self,
-            timer_interval: int = 60_000,
-            time_format: str | None = None,
-            *args: Any,
-            **kwargs: Any,
+        self,
+        timer_interval: int = 60_000,
+        time_format: str | None = None,
+        *args: Any,
+        **kwargs: Any,
     ):
         super().__init__(*args, **kwargs)
 

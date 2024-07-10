@@ -4,8 +4,13 @@ import datetime
 
 
 class CountLabel(QtWidgets.QLabel):
-    def __init__(self, *args, style_type: Literal["accent1", "accent2"] | None = None,
-                 description_field: bool = False, **kwargs):
+    def __init__(
+        self,
+        *args,
+        style_type: Literal["accent1", "accent2"] | None = None,
+        description_field: bool = False,
+        **kwargs,
+    ):
         super().__init__(*args, **kwargs)
 
         self.description = description_field
@@ -32,10 +37,10 @@ class CountLabel(QtWidgets.QLabel):
 
 class CountWidget(QtWidgets.QGroupBox):
     def __init__(
-            self,
-            title: str | None = None,
-            initial_count: int = 0,
-            style_type: Literal["accent1", "accent2"] | None = None,
+        self,
+        title: str | None = None,
+        initial_count: int = 0,
+        style_type: Literal["accent1", "accent2"] | None = None,
     ):
         super().__init__()
         self.setObjectName("CountWidget")
@@ -60,7 +65,7 @@ class CountWidget(QtWidgets.QGroupBox):
         self.target_count = 0
         self.current_count = 0
         self.increment = 1
-        self.fixed_count_up_time = 1000 # in milliseconds
+        self.fixed_count_up_time = 1000  # in milliseconds
 
         if title is not None:
             self.setTitle(title)
@@ -72,7 +77,10 @@ class CountWidget(QtWidgets.QGroupBox):
     def set_count(self, count: int):
         self.target_count = count
         counts = count - int(self.count_label.text())
-        interval = self.fixed_count_up_time // counts
+        try:
+            interval = self.fixed_count_up_time // counts
+        except ZeroDivisionError:
+            return
         self.timer.start(interval)
 
     def set_description(self, desc: str):
@@ -103,9 +111,10 @@ class CountWidget(QtWidgets.QGroupBox):
 
 
 class SummaryCountWidget(CountWidget):
-    def __init__(self, title: str | None = None, initial_count: int = 0, ):
+    def __init__(
+        self,
+        title: str | None = None,
+        initial_count: int = 0,
+    ):
         super().__init__(title=title, initial_count=initial_count)
         self.setObjectName("SummaryCountWidget")
-
-
-

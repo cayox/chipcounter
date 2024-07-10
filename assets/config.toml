@@ -30,3 +30,15 @@ text_counter_global = "Gesamt Anzahl"
 [counting]
 start_count_blue = 200
 start_count_red = 200
+chip_factor = 3
+motor_duration = 30
+
+[raspberry_pi]
+sensor_pin1 = 14
+sensor_pin2 = 18
+motor_pin = 27
+
+button_engine_pin = 28
+button_reset_pin = 30
+mode_switch_pin1 = 32
+mode_switch_pin2 = 33

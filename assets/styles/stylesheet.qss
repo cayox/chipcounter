@@ -12,14 +12,14 @@ QLabel {
 }
 
 QLabel#TimeWidget {
-    font-size: 32pt;
+    font-size: 20pt;
     font-weight: 600;
     color: %accent2%;
 }
 
 QLabel#Title {
     font-family: 'Super Dream';
-    font-size: 48pt;
+    font-size: 32pt;
     color: %accent2%;
 }
 
@@ -72,4 +72,10 @@ QGroupBox#SummaryCountWidget {
     background-color: %disabled%;
     color: %white%;
     border-radius: 8px;
+}
+
+QLabel#PageTitle {
+    font-family: 'Super Dream';
+    font-size: 42pt;
+    color: %accent1%;
 }

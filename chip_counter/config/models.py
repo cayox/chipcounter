@@ -1,4 +1,8 @@
 # ruff: noqa: D101
+import os.path
+import json
+import toml
+
 from pydantic import BaseModel
 
 
@@ -9,6 +13,19 @@ class GeneralConfig(BaseModel):
 class CountingConfig(BaseModel):
     start_count_blue: int
     start_count_red: int
+    chip_factor: float
+    motor_duration: int
+
+
+class RaspberryPiConfig(BaseModel):
+    sensor_pin1: int
+    sensor_pin2: int
+    motor_pin: int
+
+    button_engine_pin: int
+    button_reset_pin: int
+    mode_switch_pin1: int
+    mode_switch_pin2: int
 
 
 class ColorsConfig(BaseModel):
@@ -44,3 +61,12 @@ class Config(BaseModel):
     colors: ColorsConfig
     ui: UiConfig
     counting: CountingConfig
+    raspberry_pi: RaspberryPiConfig
+
+    def save(self, filepath: str):
+        """Save config to `filepath` (as toml)."""
+        if os.path.isfile(filepath):
+            os.remove(filepath)
+
+        with open(filepath, "w+") as f:
+            toml.dump(self.dict(), f)
