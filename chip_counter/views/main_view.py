@@ -1,6 +1,7 @@
 from PyQt6 import QtCore, QtWidgets
 from .view import View
 from .widgets import TimeWidget, TitleLabel
+import sys
 
 
 class MainWindow(QtWidgets.QMainWindow):
@@ -29,6 +30,10 @@ class MainView(View):
         self.date_widget = TimeWidget(time_format="%d.%m.%Y")
         header_layout.addStretch()
         header_layout.addWidget(self.date_widget)
+
+        self.close_button = QtWidgets.QPushButton("X")
+        self.close_button.clicked.connect(lambda: sys.exit(0))
+        header_layout.addWidget(self.close_button)
 
         layout.addLayout(header_layout)
 

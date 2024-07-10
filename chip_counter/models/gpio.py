@@ -1,5 +1,7 @@
 from chip_counter.config import CONFIG
+import logging
 
+log = logging.getLogger(__name__)
 
 # Mocking GPIO for non-RPi environment
 class MockGPIO:
@@ -41,9 +43,11 @@ def is_raspberry_pi() -> bool:
 
 def setup_GPIO():
     if not is_raspberry_pi():
+        log.debug("Initiating mock GPIO")
         return MockGPIO()
 
     import RPi.GPIO as GPIO
+    log.debug("Initiating real GPIO on Raspberry Pi")
 
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(CONFIG.raspberry_pi.sensor_pin1, GPIO.IN)
