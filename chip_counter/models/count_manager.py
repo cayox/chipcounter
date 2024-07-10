@@ -70,8 +70,8 @@ class CountManager(QtCore.QObject):
         # self.sensor2_thread.chip_detected.connect(lambda: self.red_chip_detected.emit())
         # self.sensor2_thread.start()
 
-        GPIO.add_event_detect(CONFIG.raspberry_pi.sensor_pin1, GPIO.FALLING, callback=lambda *_: self.red_chip_detected.emit())
-        GPIO.add_event_detect(CONFIG.raspberry_pi.sensor_pin2, GPIO.FALLING, callback=lambda *_: self.blue_chip_detected.emit())
+        GPIO.add_event_detect(CONFIG.raspberry_pi.sensor_pin1, GPIO.FALLING, callback=self._red_chip_detected)
+        GPIO.add_event_detect(CONFIG.raspberry_pi.sensor_pin2, GPIO.FALLING, callback=self._blue_chip_detected)
 
 
 
@@ -95,17 +95,15 @@ class CountManager(QtCore.QObject):
         )
 
     def cleanup(self):
-        self.sensor1_thread.stop()
-        self.sensor2_thread.stop()
+        # self.sensor1_thread.stop()
+        # self.sensor2_thread.stop()
         GPIO.cleanup()
 
-    @QtCore.pyqtSlot()
-    def _blue_chip_detected(self):
+    def _blue_chip_detected(self, *_):
         self._chip_detected("blue_chips")
         log.debug("Blue Chip detected")
 
-    @QtCore.pyqtSlot()
-    def _red_chip_detected(self):
+    def _red_chip_detected(self, *_):
         self._chip_detected("red_chips")
         log.debug("Red Chip detected")
 
