@@ -70,8 +70,8 @@ class CountManager(QtCore.QObject):
         # self.sensor2_thread.chip_detected.connect(lambda: self.red_chip_detected.emit())
         # self.sensor2_thread.start()
 
-        GPIO.add_event_detect(CONFIG.raspberry_pi.sensor_pin1, GPIO.FALLING, callback=lambda: self.red_chip_detected.emit())
-        GPIO.add_event_detect(CONFIG.raspberry_pi.sensor_pin2, GPIO.FALLING, callback=lambda: self.blue_chip_detected.emit())
+        GPIO.add_event_detect(CONFIG.raspberry_pi.sensor_pin1, GPIO.FALLING, callback=lambda *_: self.red_chip_detected.emit())
+        GPIO.add_event_detect(CONFIG.raspberry_pi.sensor_pin2, GPIO.FALLING, callback=lambda *_: self.blue_chip_detected.emit())
 
 
 
