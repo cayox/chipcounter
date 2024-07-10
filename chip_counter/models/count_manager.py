@@ -9,6 +9,10 @@ from PyQt6 import QtCore, QtWidgets
 import time
 from chip_counter.config import CONFIG
 from chip_counter.models.gpio import GPIO
+import logging
+
+
+log = logging.getLogger(__name__)
 
 
 class SensorThread(QtCore.QThread):
@@ -16,8 +20,10 @@ class SensorThread(QtCore.QThread):
 
     def __init__(self, sensor_pin: int):
         super().__init__()
+
         self.sensor_pin = sensor_pin
         self.previous_state = GPIO.input(self.sensor_pin)
+        log.info("Initiated Sensor Thread for pin %s", self.sensor_pin)
         self.running = True
 
     def run(self):
@@ -78,10 +84,12 @@ class CountManager(QtCore.QObject):
     @QtCore.pyqtSlot()
     def _blue_chip_detected(self):
         self._chip_detected("blue_chips")
+        log.debug("Blue Chip detected")
 
     @QtCore.pyqtSlot()
     def _red_chip_detected(self):
         self._chip_detected("red_chips")
+        log.debug("Red Chip detected")
 
     def _chip_detected(self, chip_type: str):
         hour = datetime.datetime.now().hour

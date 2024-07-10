@@ -2,6 +2,9 @@ from PyQt6 import QtCore
 from chip_counter.models.gpio import GPIO
 import time
 from chip_counter.config import CONFIG
+import logging
+
+log = logging.getLogger(__name__)
 
 
 class ButtonSwitchManager(QtCore.QObject):
@@ -36,12 +39,15 @@ class ButtonSwitchManager(QtCore.QObject):
         while True:
             if not GPIO.input(self.button1_pin):
                 self.button1_pressed.emit()
+                log.info("Button1 pressed")
                 time.sleep(0.2)
             if not GPIO.input(self.button2_pin):
                 self.button2_pressed.emit()
+                log.info("Button2 pressed")
                 time.sleep(0.2)
             new_switch_state = self.get_switch_state()
             if new_switch_state != self.switch_state:
+                log.info("New Switch state %s", new_switch_state)
                 self.switch_state = new_switch_state
                 self.switch_changed.emit(self.switch_state)
             time.sleep(0.1)

@@ -6,8 +6,11 @@ from chip_counter.models.count_manager import CountManager
 from chip_counter.models.input_manager import ButtonSwitchManager
 from PyQt6 import QtCore
 from chip_counter.config import CONFIG
+import logging
 
 DATA = pd.DataFrame({"Counts": np.random.randint(0, 200, 24)})
+
+log = logging.getLogger(__name__)
 
 
 class MainController(Controller[MainView]):
@@ -40,6 +43,7 @@ class MainController(Controller[MainView]):
 
     @QtCore.pyqtSlot()
     def increment_count(self):
+        log.info("Count increment detected")
         history = self.count_manager.count_history
 
         sum_blue_chips = int(history["blue_chips"].sum())
