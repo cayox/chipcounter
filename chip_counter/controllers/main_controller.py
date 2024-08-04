@@ -61,6 +61,7 @@ class MainController(Controller[MainView]):
             button2_pin=CONFIG.raspberry_pi.button_engine_pin,
             switch_pin1=CONFIG.raspberry_pi.mode_switch_pin1,
             switch_pin2=CONFIG.raspberry_pi.mode_switch_pin2,
+            power_button_pin=CONFIG.raspberry_pi.power_button_pin,
         )
 
         self.display_counts()

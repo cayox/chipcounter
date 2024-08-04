@@ -31,6 +31,8 @@ class RaspberryPiConfig(BaseModel):
     mode_switch_pin1: int
     mode_switch_pin2: int
 
+    power_button_pin: int
+
 
 class ColorsConfig(BaseModel):
     background_color: str

@@ -49,3 +49,5 @@ button_engine_pin = 10
 button_reset_pin = 22
 mode_switch_pin1 = 27
 mode_switch_pin2 = 17
+
+power_button_pin = 1
