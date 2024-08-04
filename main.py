@@ -5,29 +5,27 @@ import sys
 from PyQt6 import QtGui, QtWidgets
 
 from chip_counter.config import APP_CONFIG_ROOT, ASSETS, CONFIG
-from chip_counter.log import setup_basic_logger
 from chip_counter.controllers import MainController
+from chip_counter.log import setup_basic_logger
 
 STYLESHEET = os.path.join(ASSETS, "styles", "stylesheet.qss")
 FONTS = os.path.join(ASSETS, "fonts")
 
 log_file = os.path.join(
-    APP_CONFIG_ROOT,
-    CONFIG.general.log_directory,
-    "disco_express.log",
+    APP_CONFIG_ROOT, CONFIG.general.log_directory, "disco_express.log"
 )
 os.makedirs(os.path.dirname(log_file), exist_ok=True)
 setup_basic_logger(log_file)
 
 
-def load_fonts():
+def load_fonts() -> None:
     """Load all available fonts in the assets/fonts directory into the QFontDatabase."""
     for file in os.listdir(FONTS):
         font = os.path.join(FONTS, file)
         QtGui.QFontDatabase.addApplicationFont(font)
 
 
-def main():  # noqa: D103
+def main() -> None:  # noqa: D103
     app = QtWidgets.QApplication(sys.argv)
 
     load_fonts()

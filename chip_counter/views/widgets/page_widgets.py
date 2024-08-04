@@ -2,6 +2,8 @@ from PyQt6 import QtCore, QtWidgets
 
 
 class PageTitle(QtWidgets.QWidget):
+    """Title of a page."""
+
     def __init__(self, title: str):
         super().__init__()
 

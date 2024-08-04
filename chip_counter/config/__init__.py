@@ -19,7 +19,7 @@ APP_CONFIG_ROOT = os.path.expanduser("~/chip_counter")
 ASSETS = os.path.join(get_application_path(), "assets")
 
 
-def checkout_files():
+def checkout_files() -> None:
     """Check if necessary files are in APP_CONFIG_ROOT and copy them there if not."""
     os.makedirs(APP_CONFIG_ROOT, exist_ok=True)
 
@@ -38,7 +38,5 @@ def checkout_files():
 
 checkout_files()
 
-config = os.path.join(APP_CONFIG_ROOT, "config.toml")
-with open(config, "rb") as f:
-    toml = tomllib.load(f)
-    CONFIG = Config(**toml)
+CONFIG_PATH = os.path.join(APP_CONFIG_ROOT, "config.toml")
+CONFIG = Config.load_toml(CONFIG_PATH)

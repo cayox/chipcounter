@@ -6,6 +6,32 @@ QWidget#MainView {
     background-color: %white%;
 }
 
+QLineEdit, QSpinBox, QDoubleSpinBox, QComboBox {
+    font-size: 24px;
+    font-weight: 600;
+    background-color: %background_color%;
+    border-bottom: 1px solid %accent1%;
+    padding: 6px;
+    color: %accent1%;
+}
+
+
+QPushButton {
+    background-color: %accent1%;
+    color: %white%;
+    border: 1px solid %accent1_light%;
+    border-radius: 4px;
+    font-size: 24px;
+    font-weight: 600;
+    padding: 12px;
+}
+
+QPushButton#SettingsButton {
+    font-size: 16px;
+    font-weight: 600;
+    padding: 6px;
+}
+
 QLabel {
     color: %text_color%;
     font-size: 16pt;
@@ -38,30 +64,39 @@ QGroupBox#CountWidget[style_type="accent2"] {
 }
 
 QLabel#CountLabel {
-    font-size: 64pt;
+    font-size: 48pt;
     color: %disabled_light%;
 }
 
-QLabel#CountLabel[style_type="accent1"] {
-    font-size: 64pt;
+QLabel#SubCountLabel {
+    font-size: 16pt;
+    color: %disabled_light%;
+}
+
+QLabel#CountLabel[style_type="accent1"],
+QLabel#SubCountLabel[style_type="accent1"] {
     color: %accent1_light%;
 }
 
-QLabel#CountLabel[style_type="accent2"] {
+QLabel#CountLabel[style_type="accent2"],
+QLabel#SubCountLabel[style_type="accent2"] {
     color: %accent2_light%;
 }
 
-QLabel#CountLabel[style_type="description_accent1"] {
+QLabel#CountLabel[style_type="description_accent1"],
+QLabel#SubCountLabel[style_type="description_accent1"] {
     font-size: 16pt;
     color: %accent1_light%;
 }
 
-QLabel#CountLabel[style_type="description_accent2"] {
+QLabel#CountLabel[style_type="description_accent2"],
+QLabel#SubCountLabel[style_type="description_accent2"] {
     font-size: 16pt;
     color: %accent2_light%;
 }
 
-QLabel#CountLabel[style_type="description_None"] {
+QLabel#CountLabel[style_type="description_None"],
+QLabel#SubCountLabel[style_type="description_None"]{
     font-size: 16pt;
     color: %disabled_dark%;
 }
@@ -78,4 +113,27 @@ QLabel#PageTitle {
     font-family: 'Super Dream';
     font-size: 42pt;
     color: %accent1%;
+}
+
+
+/*PASSWORD*/
+
+QPushButton#PasswordButton {
+    font-size: 24px;
+    font-weight: 600;
+    padding: 12px;
+}
+
+/* BIGGER CONTROLS ON INPUTS */
+QSpinBox::up-button,
+QDoubleSpinBox::up-button,
+QSpinBox::down-button,
+QDoubleSpinBox::down-button,
+QSpinBox::up-arrow,
+QDoubleSpinBox::up-arrow,
+QSpinBox::down-arrow,
+QDoubleSpinBox::down-arrow,
+ {
+    width: 100px;
+    height: 48px;
 }

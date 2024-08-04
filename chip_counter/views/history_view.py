@@ -1,11 +1,15 @@
-from .view import View
-from PyQt6 import QtWidgets, QtCore, QtGui
-from .widgets import CountWidget, SummaryCountWidget, CountBarChartWidget
+from PyQt6 import QtWidgets
+
 from chip_counter.config import CONFIG
+
+from .view import View
+from .widgets import CountBarChartWidget, CountWidget, SummaryCountWidget
 
 
 class HistoryView(View):
-    def _build_ui(self):
+    """View displaying the history of the daily counts."""
+
+    def _build_ui(self) -> None:
         layout = QtWidgets.QVBoxLayout(self)
 
         count_widget_layout = QtWidgets.QGridLayout()

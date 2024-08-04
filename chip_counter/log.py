@@ -17,9 +17,7 @@ class PrettyFormatter(logging.Formatter):
         format_orig = "[{filename}:{lineno} ({funcName})] " + format_orig
 
         formatter = logging.Formatter(
-            format_orig,
-            datefmt=self.datefmt,
-            style=self.style,
+            format_orig, datefmt=self.datefmt, style=self.style
         )
         return formatter.format(record)
 

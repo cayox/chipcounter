@@ -1,15 +1,19 @@
-import datetime
+from PyQt6 import QtCore, QtWidgets
+
+from chip_counter.config import CONFIG
 
 from .view import View
-from PyQt6 import QtWidgets, QtCore, QtGui
-from .widgets import CountWidget, SummaryCountWidget, CountBarChartWidget, PageTitle
-from chip_counter.config import CONFIG
+from .widgets import PageTitle
 
 
 class SettingsView(View):
-    def _build_ui(self):
+    """View to display the user settings."""
+
+    def _build_ui(self) -> None:
         main_lay = QtWidgets.QVBoxLayout(self)
-        main_lay.setAlignment(QtCore.Qt.AlignmentFlag.AlignTop)
+        main_lay.setAlignment(
+            QtCore.Qt.AlignmentFlag.AlignTop | QtCore.Qt.AlignmentFlag.AlignCenter
+        )
 
         title = PageTitle("Einstellungen")
         main_lay.addWidget(title)
@@ -32,6 +36,12 @@ class SettingsView(View):
         form_layout.addRow("Vibrationsinterval: ", self.motor_duration)
 
         self.reset_button = QtWidgets.QPushButton("Reset")
-        form_layout.addWidget(self.reset_button)
+        form_layout.addRow("Kompletter Zähler Reset: ", self.reset_button)
+
+        self.close_button = QtWidgets.QPushButton("Schließen")
+        form_layout.addRow("Programm schließen", self.close_button)
+
+        self.back_button = QtWidgets.QPushButton("Zurück")
+        form_layout.addWidget(self.back_button)
 
         main_lay.addLayout(form_layout)

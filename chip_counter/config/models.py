@@ -1,8 +1,8 @@
 # ruff: noqa: D101
 import os.path
-import json
-import toml
+import tomllib
 
+import toml
 from pydantic import BaseModel
 
 
@@ -11,18 +11,20 @@ class GeneralConfig(BaseModel):
 
 
 class CountingConfig(BaseModel):
-    start_count_blue: int
-    start_count_red: int
     chip_factor: float
     motor_duration: int
+    seperate_motors: bool
 
 
 class RaspberryPiConfig(BaseModel):
-    sensor_pin1: int
-    ctrl_sensor_pin1: int
-    sensor_pin2: int
-    ctrl_sensor_pin2: int
-    motor_pin: int
+    sensor_bounce_time: int
+
+    count_sensor1_pin: int
+    count_sensor2_pin: int
+    motor1_trigger_sensor: int
+    motor1_pin: int
+    motor2_trigger_sensor: int
+    motor2_pin: int
 
     button_engine_pin: int
     button_reset_pin: int
@@ -56,6 +58,9 @@ class UiConfig(BaseModel):
     text_counter1: str
     text_counter2: str
     text_counter_global: str
+    admin_password: str
+
+    save_interval: int  # in minutes
 
 
 class Config(BaseModel):
@@ -65,7 +70,15 @@ class Config(BaseModel):
     counting: CountingConfig
     raspberry_pi: RaspberryPiConfig
 
-    def save(self, filepath: str):
+    @classmethod
+    def load_toml(cls: "Config", toml_path: str) -> "Config":
+        """Class method to load the config from a toml file."""
+        with open(toml_path, "rb") as f:
+            toml = tomllib.load(f)
+
+            return cls(**toml)
+
+    def save(self, filepath: str) -> None:
         """Save config to `filepath` (as toml)."""
         if os.path.isfile(filepath):
             os.remove(filepath)

@@ -1,6 +1,7 @@
-from PyQt6 import QtCore, QtWidgets, QtGui
-from typing import Literal, Any
 import datetime
+from typing import Any
+
+from PyQt6 import QtCore, QtWidgets
 
 
 class HeaderLabel(QtWidgets.QLabel):
@@ -23,6 +24,7 @@ class TitleLabel(QtWidgets.QLabel):
     def __init__(self, text: str):
         super().__init__(f"{text}")
         self.setObjectName("Title")
+        self.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
 
 
 class TimeWidget(HeaderLabel):
@@ -59,6 +61,7 @@ class TimeWidget(HeaderLabel):
         self.timer.start()
 
     @QtCore.pyqtSlot()
-    def update_time(self):
+    def update_time(self) -> None:
+        """Method to update the time text."""
         time = datetime.datetime.now()
         self.setText(time.strftime(self.time_format))

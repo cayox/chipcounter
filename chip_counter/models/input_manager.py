@@ -1,23 +1,22 @@
-from PyQt6 import QtCore
-from chip_counter.models.gpio import GPIO
-import time
-from chip_counter.config import CONFIG
 import logging
+import time
+
+from PyQt6 import QtCore
+
+from chip_counter.models.gpio import GPIO
 
 log = logging.getLogger(__name__)
 
 
 class ButtonSwitchManager(QtCore.QObject):
+    """Class to manage the buttons and switches states of this project."""
+
     button1_pressed = QtCore.pyqtSignal()
     button2_pressed = QtCore.pyqtSignal()
     switch_changed = QtCore.pyqtSignal(int)
 
     def __init__(
-        self,
-        button1_pin: int,
-        button2_pin: int,
-        switch_pin1: int,
-        switch_pin2: int,
+        self, button1_pin: int, button2_pin: int, switch_pin1: int, switch_pin2: int
     ):
         super().__init__()
         self.button1_pin = button1_pin
@@ -35,7 +34,8 @@ class ButtonSwitchManager(QtCore.QObject):
         self.thread.start()
 
     @QtCore.pyqtSlot()
-    def monitor_inputs(self):
+    def monitor_inputs(self) -> None:
+        """Method to check the inputs of the buttons and switches in an endless loop."""
         while True:
             if not GPIO.input(self.button1_pin):
                 self.button1_pressed.emit()
@@ -53,12 +53,8 @@ class ButtonSwitchManager(QtCore.QObject):
             time.sleep(0.1)
 
     def get_switch_state(self) -> int:
+        """Method to find out the current state of the switch. Returns -1 if no state was detected."""
         for index, pin in enumerate(self.switch_pins):
             if not GPIO.input(pin):
                 return index
         return -1
-
-    def __del__(self):
-        self.thread.quit()
-        self.thread.wait()
-        GPIO.cleanup()

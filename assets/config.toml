@@ -26,21 +26,26 @@ disabled_dark = "#6c757d"
 text_counter1 = "Blaue Chips"
 text_counter2 = "Rote Chips"
 text_counter_global = "Gesamt Anzahl"
+admin_password = "1111"
+
+save_interval = 10  # in minuten
 
 [counting]
-start_count_blue = 200
-start_count_red = 200
 chip_factor = 3
 motor_duration = 30
+seperate_motors = true
 
 [raspberry_pi]
-sensor_pin1 = 14
-ctrl_sensor_pin1 = 26
-sensor_pin2 = 18
-ctrl_sensor_pin2 = 19
-motor_pin = 27
+sensor_bounce_time = 200  # in ms
 
-button_engine_pin = 28
-button_reset_pin = 30
-mode_switch_pin1 = 32
-mode_switch_pin2 = 33
+count_sensor1_pin = 14
+count_sensor2_pin = 18
+motor1_trigger_sensor = 8
+motor1_pin = 21
+motor2_trigger_sensor = 7
+motor2_pin = 20
+
+button_engine_pin = 10
+button_reset_pin = 22
+mode_switch_pin1 = 27
+mode_switch_pin2 = 17

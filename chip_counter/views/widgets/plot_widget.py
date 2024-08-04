@@ -1,14 +1,17 @@
-import configparser
-import sys
 import numpy as np
-from PyQt6.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget
-from PyQt6.QtCore import QTimer, Qt
-import pyqtgraph as pg
 import pandas as pd
+import pyqtgraph as pg
+from PyQt6.QtCore import QTimer
+from PyQt6.QtWidgets import QVBoxLayout, QWidget
+
 from chip_counter.config import CONFIG
+
+HOURS_IN_DAY = 24
 
 
 class CountBarChartWidget(QWidget):
+    """Widget to display daily counts in a bar chart hourly."""
+
     def __init__(self):
         super().__init__()
 
@@ -18,7 +21,7 @@ class CountBarChartWidget(QWidget):
         self.plot_widget = pg.PlotWidget()
         self.plot_widget.setBackground(CONFIG.colors.background_color)
         self.plot_widget.setLabel("left", "Chips")
-        self.plot_widget.setLabel("bottom", "Hours", units="h")
+        self.plot_widget.setLabel("bottom", "Stunden", units="h")
 
         # Disable interactivity
         self.plot_widget.setMouseEnabled(x=False, y=False)
@@ -44,11 +47,17 @@ class CountBarChartWidget(QWidget):
         self.timer.timeout.connect(self.update_animation)
         self.animation_step = 0
 
-    def animate_on_show(self):
+    def animate_on_show(self) -> None:
+        """Start the animation when showing the plot widget."""
         self.animation_step = 0
         self.timer.start(50)  # Update every 50 milliseconds
 
-    def update_animation(self):
+    def update_animation(self) -> None:
+        """Method to update the counting animation."""
+        if not self.counts.any():
+            self.timer.stop()
+            return
+
         if self.animation_step < len(self.counts):
             self.bar_item.setOpts(
                 height=self.counts * (self.animation_step / len(self.counts))
@@ -57,8 +66,13 @@ class CountBarChartWidget(QWidget):
         else:
             self.timer.stop()
 
-    def update_data(self, dataframe: pd.DataFrame):
-        if isinstance(dataframe, pd.DataFrame) and dataframe.shape[0] == 24:
+    def update_data(self, dataframe: pd.DataFrame) -> None:
+        """Method to set new data for the plot to display.
+
+        Args:
+            dataframe: the new data to display
+        """
+        if isinstance(dataframe, pd.DataFrame) and dataframe.shape[0] == HOURS_IN_DAY:
             self.counts = dataframe["summary"].values
             self.animate_on_show()
         else:

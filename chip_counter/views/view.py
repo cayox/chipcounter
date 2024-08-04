@@ -1,3 +1,5 @@
+from typing import Never
+
 from PyQt6 import QtWidgets
 
 
@@ -10,5 +12,5 @@ class View(QtWidgets.QWidget):
 
         self._build_ui()
 
-    def _build_ui(self):
+    def _build_ui(self) -> Never:
         raise NotImplementedError
