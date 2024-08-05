@@ -1,6 +1,6 @@
 # Chip Counter
 
-Chipzähler mit Vibrationsmotor und Touchscreen.
+Chipzähler mit Tagesverlauf, Vibrationsmotor und Touchscreen.
 
 # BOM
 
