@@ -1491,34 +1491,6 @@ Feel free to contact us at &lt;a href="mailto:Support@PCBLayout.com"&gt;Support@
 <junction x="-43.18" y="-124.46"/>
 </segment>
 </net>
-<net name="N$2" class="0">
-<segment>
-<pinref part="TCRT5000-SENSOR_MOTOR1" gate="OS" pin="CATHODE"/>
-<pinref part="U1" gate="G$1" pin="GND@57"/>
-<wire x1="-91.44" y1="-73.66" x2="-91.44" y2="-119.38" width="0.1524" layer="91"/>
-<wire x1="-91.44" y1="-119.38" x2="-73.66" y2="-119.38" width="0.1524" layer="91"/>
-<pinref part="TCRT5000-SENSOR_MOTOR2" gate="OS" pin="CATHODE"/>
-<wire x1="-73.66" y1="-119.38" x2="-55.88" y2="-119.38" width="0.1524" layer="91"/>
-<wire x1="-55.88" y1="-119.38" x2="-35.56" y2="-119.38" width="0.1524" layer="91"/>
-<wire x1="-35.56" y1="-119.38" x2="-7.62" y2="-119.38" width="0.1524" layer="91"/>
-<wire x1="-73.66" y1="-73.66" x2="-73.66" y2="-119.38" width="0.1524" layer="91"/>
-<junction x="-73.66" y="-119.38"/>
-<pinref part="TCRT5000-SENSOR_COUNT1" gate="OS" pin="CATHODE"/>
-<wire x1="-55.88" y1="-73.66" x2="-55.88" y2="-119.38" width="0.1524" layer="91"/>
-<junction x="-55.88" y="-119.38"/>
-<pinref part="TCRT5000-SENSOR_COUNT2" gate="OS" pin="CATHODE"/>
-<wire x1="-35.56" y1="-73.66" x2="-35.56" y2="-119.38" width="0.1524" layer="91"/>
-<junction x="-35.56" y="-119.38"/>
-<pinref part="RELAY-MOTOR1" gate="G$1" pin="5"/>
-<wire x1="-91.44" y1="-119.38" x2="-106.68" y2="-119.38" width="0.1524" layer="91"/>
-<wire x1="-106.68" y1="-119.38" x2="-106.68" y2="-12.7" width="0.1524" layer="91"/>
-<junction x="-91.44" y="-119.38"/>
-<wire x1="-106.68" y1="-12.7" x2="-106.68" y2="0" width="0.1524" layer="91"/>
-<wire x1="-106.68" y1="-12.7" x2="-154.94" y2="-12.7" width="0.1524" layer="91"/>
-<pinref part="RELAY-MOTOR2" gate="G$1" pin="5"/>
-<wire x1="-154.94" y1="-12.7" x2="-154.94" y2="0" width="0.1524" layer="91"/>
-</segment>
-</net>
 <net name="N$3" class="0">
 <segment>
 <pinref part="TCRT5000-SENSOR_COUNT1" gate="OS" pin="EMITTER"/>
@@ -1555,16 +1527,40 @@ Feel free to contact us at &lt;a href="mailto:Support@PCBLayout.com"&gt;Support@
 <segment>
 <pinref part="BUTTON-RESET" gate="1" pin="2"/>
 <wire x1="-22.86" y1="33.02" x2="-25.4" y2="33.02" width="0.1524" layer="91"/>
-<pinref part="U1" gate="G$1" pin="5V@1"/>
 <wire x1="-25.4" y1="33.02" x2="-25.4" y2="15.24" width="0.1524" layer="91"/>
-<wire x1="-25.4" y1="15.24" x2="-25.4" y2="-121.92" width="0.1524" layer="91"/>
-<wire x1="-25.4" y1="-121.92" x2="-7.62" y2="-121.92" width="0.1524" layer="91"/>
 <pinref part="BUTTON-MOTOR-ACTIVATION" gate="1" pin="2"/>
 <wire x1="-25.4" y1="33.02" x2="-25.4" y2="93.98" width="0.1524" layer="91"/>
 <wire x1="-25.4" y1="93.98" x2="-22.86" y2="93.98" width="0.1524" layer="91"/>
 <junction x="-25.4" y="33.02"/>
 <pinref part="KEYSWITCH" gate="G$1" pin="1"/>
+<pinref part="TCRT5000-SENSOR_MOTOR1" gate="OS" pin="CATHODE"/>
+<pinref part="U1" gate="G$1" pin="GND@57"/>
+<wire x1="-91.44" y1="-73.66" x2="-91.44" y2="-119.38" width="0.1524" layer="91"/>
+<wire x1="-91.44" y1="-119.38" x2="-73.66" y2="-119.38" width="0.1524" layer="91"/>
+<pinref part="TCRT5000-SENSOR_MOTOR2" gate="OS" pin="CATHODE"/>
+<wire x1="-73.66" y1="-119.38" x2="-55.88" y2="-119.38" width="0.1524" layer="91"/>
+<wire x1="-55.88" y1="-119.38" x2="-35.56" y2="-119.38" width="0.1524" layer="91"/>
+<wire x1="-35.56" y1="-119.38" x2="-25.4" y2="-119.38" width="0.1524" layer="91"/>
+<wire x1="-25.4" y1="-119.38" x2="-7.62" y2="-119.38" width="0.1524" layer="91"/>
+<wire x1="-73.66" y1="-73.66" x2="-73.66" y2="-119.38" width="0.1524" layer="91"/>
+<junction x="-73.66" y="-119.38"/>
+<pinref part="TCRT5000-SENSOR_COUNT1" gate="OS" pin="CATHODE"/>
+<wire x1="-55.88" y1="-73.66" x2="-55.88" y2="-119.38" width="0.1524" layer="91"/>
+<junction x="-55.88" y="-119.38"/>
+<pinref part="TCRT5000-SENSOR_COUNT2" gate="OS" pin="CATHODE"/>
+<wire x1="-35.56" y1="-73.66" x2="-35.56" y2="-119.38" width="0.1524" layer="91"/>
+<junction x="-35.56" y="-119.38"/>
+<pinref part="RELAY-MOTOR1" gate="G$1" pin="5"/>
+<wire x1="-91.44" y1="-119.38" x2="-106.68" y2="-119.38" width="0.1524" layer="91"/>
+<wire x1="-106.68" y1="-119.38" x2="-106.68" y2="-12.7" width="0.1524" layer="91"/>
+<junction x="-91.44" y="-119.38"/>
+<wire x1="-106.68" y1="-12.7" x2="-106.68" y2="0" width="0.1524" layer="91"/>
+<wire x1="-106.68" y1="-12.7" x2="-154.94" y2="-12.7" width="0.1524" layer="91"/>
+<pinref part="RELAY-MOTOR2" gate="G$1" pin="5"/>
+<wire x1="-154.94" y1="-12.7" x2="-154.94" y2="0" width="0.1524" layer="91"/>
+<wire x1="-25.4" y1="15.24" x2="-25.4" y2="-119.38" width="0.1524" layer="91"/>
 <junction x="-25.4" y="15.24"/>
+<junction x="-25.4" y="-119.38"/>
 </segment>
 </net>
 <net name="N$8" class="0">
@@ -1629,8 +1625,14 @@ Feel free to contact us at &lt;a href="mailto:Support@PCBLayout.com"&gt;Support@
 <net name="MOTOR_GND" class="0">
 <segment>
 <pinref part="SOURCE" gate="G$1" pin="-"/>
-<wire x1="-218.44" y1="53.34" x2="-218.44" y2="-60.96" width="0.1524" layer="91"/>
+<wire x1="-218.44" y1="53.34" x2="-218.44" y2="-40.64" width="0.1524" layer="91"/>
 <label x="-218.44" y="-60.96" size="1.778" layer="95"/>
+<pinref part="R2" gate="G$1" pin="3"/>
+<wire x1="-218.44" y1="-40.64" x2="-218.44" y2="-60.96" width="0.1524" layer="91"/>
+<wire x1="-185.42" y1="-40.64" x2="-218.44" y2="-40.64" width="0.1524" layer="91"/>
+<junction x="-218.44" y="-40.64"/>
+<pinref part="R1" gate="G$1" pin="3"/>
+<wire x1="-137.16" y1="-40.64" x2="-218.44" y2="-40.64" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$18" class="0">

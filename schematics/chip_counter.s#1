@@ -1629,14 +1629,8 @@ Feel free to contact us at &lt;a href="mailto:Support@PCBLayout.com"&gt;Support@
 <net name="MOTOR_GND" class="0">
 <segment>
 <pinref part="SOURCE" gate="G$1" pin="-"/>
-<wire x1="-218.44" y1="53.34" x2="-218.44" y2="-40.64" width="0.1524" layer="91"/>
+<wire x1="-218.44" y1="53.34" x2="-218.44" y2="-60.96" width="0.1524" layer="91"/>
 <label x="-218.44" y="-60.96" size="1.778" layer="95"/>
-<pinref part="R2" gate="G$1" pin="3"/>
-<wire x1="-218.44" y1="-40.64" x2="-218.44" y2="-60.96" width="0.1524" layer="91"/>
-<wire x1="-185.42" y1="-40.64" x2="-218.44" y2="-40.64" width="0.1524" layer="91"/>
-<junction x="-218.44" y="-40.64"/>
-<pinref part="R1" gate="G$1" pin="3"/>
-<wire x1="-137.16" y1="-40.64" x2="-218.44" y2="-40.64" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$18" class="0">
