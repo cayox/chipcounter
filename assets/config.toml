@@ -23,31 +23,51 @@ disabled = "#adb5bd"
 disabled_dark = "#6c757d"
 
 [ui]
+# Text für den blauen Zählern
 text_counter1 = "Blaue Chips"
+# Text für den roten Zähler
 text_counter2 = "Rote Chips"
+# Text fpr den globale Zähler (grau)
 text_counter_global = "Gesamt Anzahl"
+# Passwort für das die Admin ansicht
 admin_password = "1111"
 
+# Intervall in dem die Zählung auf die Festplatte gespeichert wird.
 save_interval = 10  # in minuten
 
 [counting]
+# Faktor mit dem der Wert der Roten Chips multipliziert wird.
 chip_factor = 3
+# Dauer in Sekunden die die Motoren vibrieren
 motor_duration = 30
+# Flag ob beide Motoren separat [true] oder zusammen [false] gesteuert werden sollen
 seperate_motors = true
 
 [raspberry_pi]
-sensor_bounce_time = 200  # in ms
+# zeit die ein signal stabil sein muss um erkannt zu werden
+# je niedriger desto schneller die Erkennung aber desto höher ist auch die Fehleranfälligkeit
+sensor_bounce_time = 100  # in ms
 
+# Sensor zum Zählen von blauen Chips
 count_sensor1_pin = 14
+# Sensor zum Zählen von roten Chips
 count_sensor2_pin = 18
+# Sensor zum aktiviieren vom blauen Motor
 motor1_trigger_sensor = 8
+# Pin zum starten und stoppen des blauen Motors
 motor1_pin = 21
+# Sensor zum aktiviieren vom roten Motor
 motor2_trigger_sensor = 7
+# Pin zum starten und stoppen des roten Motors
 motor2_pin = 20
 
+# Pin für den Knopf zum starten der Motoren
 button_engine_pin = 10
+# Pin für den Knopf um den Zähler auf der Homepage zu resetten
 button_reset_pin = 22
+# Pin zum Triggern der Homeansicht
 mode_switch_pin1 = 27
+# Pin zum Triggern der Adminansicht (nach Passworteingabe)
 mode_switch_pin2 = 17
 
 power_button_pin = 1
