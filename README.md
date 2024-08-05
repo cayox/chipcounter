@@ -24,6 +24,8 @@ Diese Materialien werden für das System benötigt:
 # Aufbau
 Das System muss [wie folgt](schemactics/chip_counter.png) aufgebaut werden. Die genaue Pinbelegung kann aus der [Config](assets/config.toml)
 entnommen werden.
+
+## Stromlaufplan
 ![](schematics/chip_counter.png)
 
 # Bedienungsanleitung
