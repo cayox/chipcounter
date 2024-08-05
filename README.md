@@ -22,7 +22,7 @@ Diese Materialien werden für das System benötigt:
 | Doppelrelais 5V steuerspannung | 11,78€ | 1      | [Amazon](https://www.amazon.de/dp/B07QYLN6LD?psc=1)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 
 # Aufbau
-Das System muss wie folgt aufgebaut werden. Die genaue Pinbelegung kann aus der [Config](assets/config.toml)
+Das System muss [wie folgt](schemactics/chip_counter.png) aufgebaut werden. Die genaue Pinbelegung kann aus der [Config](assets/config.toml)
 entnommen werden.
 ![](schematics/chip_counter.png)
 
