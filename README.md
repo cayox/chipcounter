@@ -1,6 +1,6 @@
 # chip_counter
 
-A device for counting chips of a roller coaster
+Chipzähler mit Vibrationsmotor und Touchscreen.
 
 # BOM
 
