@@ -1,4 +1,4 @@
-# chip_counter
+# Chip Counter
 
 Chipzähler mit Vibrationsmotor und Touchscreen.
 
