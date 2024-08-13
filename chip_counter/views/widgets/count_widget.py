@@ -107,13 +107,13 @@ class CountWidget(QtWidgets.QGroupBox):
     def set_count(self, count: int) -> None:
         """Method to set the count value of the widget animated."""
         log.debug("Setting counts to %s", count)
-        self.target_count = count
+        self.target_count = int(count)
         counts = count - int(self.count_label.text())
 
-        try:
-            interval = self.fixed_count_up_time // counts
-        except ZeroDivisionError:
+        if not counts:
             return
+
+        interval = int(self.fixed_count_up_time // counts)
 
         self.timer.start(abs(interval))
 

@@ -24,9 +24,9 @@ disabled_dark = "#6c757d"
 
 [ui]
 # Text für den blauen Zählern
-text_counter1 = "Blaue Chips"
+text_counter1 = "Blue Chips"
 # Text für den roten Zähler
-text_counter2 = "Rote Chips"
+text_counter2 = "Red Chips"
 # Text fpr den globale Zähler (grau)
 text_counter_global = "Gesamt Anzahl"
 # Passwort für das die Admin ansicht
@@ -41,12 +41,12 @@ chip_factor = 3
 # Dauer in Sekunden die die Motoren vibrieren
 motor_duration = 30
 # Flag ob beide Motoren separat [true] oder zusammen [false] gesteuert werden sollen
-seperate_motors = true
+seperate_motors = false
 
 [raspberry_pi]
 # zeit die ein signal stabil sein muss um erkannt zu werden
 # je niedriger desto schneller die Erkennung aber desto höher ist auch die Fehleranfälligkeit
-sensor_bounce_time = 100  # in ms
+sensor_bounce_time = 200  # in ms
 
 # Sensor zum Zählen von blauen Chips
 count_sensor1_pin = 14

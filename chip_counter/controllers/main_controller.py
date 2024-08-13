@@ -91,28 +91,21 @@ class MainController(Controller[MainView]):
         sum_all_chips = int(history["summary"].sum())
 
         log.debug(
-            "Chip Sums: [Red: %s] [Blue: %s] [All: %s]",
+            "HOME Chip Sums: [Red: %s] [Blue: %s] [All: %s]",
             sum_red_chips,
             sum_blue_chips,
             sum_all_chips,
         )
-        factor = history.loc[0, "factor"]
 
         self.view_home.red_chips_count_widget.set_count(sum_red_chips)
-        self.view_home.red_chips_count_widget.set_total_counts(sum_red_chips)
         self.view_home.blue_chips_count_widget.set_count(sum_blue_chips)
-        self.view_home.blue_chips_count_widget.set_total_counts(sum_blue_chips * factor)
         self.view_home.all_chips_count_widget.set_count(sum_all_chips)
-        self.view_home.all_chips_count_widget.set_total_counts(
-            sum_blue_chips * factor + sum_red_chips
-        )
 
-        history = self.count_manager.daily_count_history
-        factor = history.loc[0, "factor"]
+        factor = self.count_manager.daily_count_history.factor
 
         sum_blue_chips = int(history["blue_chips"].sum())
         sum_red_chips = int(history["red_chips"].sum())
-        sum_all_chips = int(history["summary"].sum())
+        sum_all_chips = sum_red_chips + int(sum_blue_chips // factor)
 
         log.debug(
             "DAILY Chip Sums: [Red: %s] [Blue: %s] [All: %s]",
@@ -122,16 +115,12 @@ class MainController(Controller[MainView]):
         )
 
         self.view_history.red_chips_count_widget.set_count(sum_red_chips)
-        self.view_history.blue_chips_count_widget.set_count(sum_blue_chips)
+        self.view_history.blue_chips_count_widget.set_count(
+            int(sum_blue_chips // factor)
+        )
         self.view_history.all_chips_count_widget.set_count(sum_all_chips)
 
-        self.view_history.red_chips_count_widget.set_total_counts(sum_red_chips)
-        self.view_history.blue_chips_count_widget.set_total_counts(
-            sum_blue_chips * factor
-        )
-        self.view_history.all_chips_count_widget.set_total_counts(
-            sum_blue_chips * factor + sum_red_chips
-        )
+        self.view_history.blue_chips_count_widget.set_total_counts(sum_blue_chips)
 
         self.view_history.plot_widget.update_data(history)
 

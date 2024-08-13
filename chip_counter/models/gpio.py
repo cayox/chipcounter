@@ -69,6 +69,8 @@ def setup_gpio() -> "GPIO":
 
     log.debug("Initiating real GPIO on Raspberry Pi")
 
+    GPIO.cleanup()
+
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(CONFIG.raspberry_pi.count_sensor1_pin, GPIO.IN)
     GPIO.setup(CONFIG.raspberry_pi.count_sensor2_pin, GPIO.IN)

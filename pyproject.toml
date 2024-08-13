@@ -23,6 +23,7 @@ ruff = "^0.5.6"
 poethepoet = "^0.26.0"
 pyinstaller = "^6.6.0"
 mdpdf = "^0.0.18"
+markdown = "^3.6"
 
 [tool.poe.tasks]
 build = "pyinstaller main.spec --noconfirm"

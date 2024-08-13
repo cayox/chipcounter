@@ -41,7 +41,7 @@ class CountHistory(pd.DataFrame):
 
     def recalculate_data(self) -> None:
         """Recalculate the data and save it afterwards."""
-        self["summary"] = self["red_chips"] + self["blue_chips"] // self.factor
+        self["summary"] = self["red_chips"] + (self["blue_chips"] // self.factor)
         self.save()
 
     def load(self) -> None:
@@ -109,6 +109,18 @@ class CountManager(QtCore.QObject):
         timer.timeout.connect(self.save)
         timer.setInterval(CONFIG.ui.save_interval * 60000)
 
+        # timers because they cannot be created outside of a QThread
+        # (GPIO Thread of event handler is not such a environment)
+        self.motor1_deactivate_timer = QtCore.QTimer(self)
+        self.motor1_deactivate_timer.setSingleShot(True)
+        self.motor1_deactivate_timer.timeout.connect(self.deactivate_motor1_vibration)
+
+        self.motor2_deactivate_timer = QtCore.QTimer(self)
+        self.motor2_deactivate_timer.setSingleShot(True)
+        self.motor2_deactivate_timer.timeout.connect(self.deactivate_motor1_vibration)
+
+        self.timers = []
+
     def reset(self) -> None:
         """Method to reset the current history."""
         self.count_history.full_reset()
@@ -134,9 +146,7 @@ class CountManager(QtCore.QObject):
         log.debug("Activating motor 1")
         self._motor1_active = True
         GPIO.output(CONFIG.raspberry_pi.motor1_pin, GPIO.HIGH)
-        QtCore.QTimer.singleShot(
-            CONFIG.counting.motor_duration * 1000, self.deactivate_motor1_vibration
-        )
+        self.motor1_deactivate_timer.start(CONFIG.counting.motor_duration * 1000)
         if not CONFIG.counting.seperate_motors:
             self.activate_motor2_vibration()
 
@@ -156,9 +166,7 @@ class CountManager(QtCore.QObject):
         log.debug("Activating motor 2")
         self._motor2_active = True
         GPIO.output(CONFIG.raspberry_pi.motor2_pin, GPIO.HIGH)
-        QtCore.QTimer.singleShot(
-            CONFIG.counting.motor_duration * 1000, self.deactivate_motor2_vibration
-        )
+        self.motor1_deactivate_timer.start(CONFIG.counting.motor_duration * 1000)
         if not CONFIG.counting.seperate_motors:
             self.activate_motor1_vibration()
 
