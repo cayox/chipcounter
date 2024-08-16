@@ -23,11 +23,11 @@ jobs:
             curl -X POST \
               -H "Authorization: Bearer ${{ secrets.PYDIO_API_TOKEN }}" \
               -F "file=@${file}" \
-              "${PYDIO_SERVER}/api/v2/fs/upload/tims-projekte/Chip%20Counter/${relative_path}"
+              "${{ secrets.PYDIO_SERVER }}/api/v2/fs/upload/tims-projekte/Chip%20Counter/${relative_path}"
           done
 
       - name: Invalidate Cache (if applicable)
         run: |
           curl -X POST \
           -H "Authorization: Bearer ${{ secrets.PYDIO_API_TOKEN }}" \
-          "${PYDIO_SERVER}/api/v2/cache/invalidate"
+          "${{ secrets.PYDIO_SERVER }}/api/v2/cache/invalidate"
