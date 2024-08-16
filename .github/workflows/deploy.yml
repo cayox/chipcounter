@@ -1,0 +1,33 @@
+name: Deploy to Pydio Cells via API
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install cURL
+        run: sudo apt-get install -y curl
+
+      - name: Upload files to Pydio Cells
+        run: |
+          for file in $(find . -type f); do
+            relative_path=$(echo $file | sed 's|^\./||')
+            curl -X POST \
+              -H "Authorization: Bearer ${{ secrets.PYDIO_API_TOKEN }}" \
+              -F "file=@${file}" \
+              "${PYDIO_SERVER}/api/v2/fs/upload/tims-projekte/Chip%20Counter/${relative_path}"
+          done
+
+      - name: Invalidate Cache (if applicable)
+        run: |
+          curl -X POST \
+          -H "Authorization: Bearer ${{ secrets.PYDIO_API_TOKEN }}" \
+          "${PYDIO_SERVER}/api/v2/cache/invalidate"
