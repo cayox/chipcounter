@@ -11,6 +11,9 @@ jobs:
     runs-on: ubuntu-latest
     environment: pydio-cells
 
+    permissions:
+      contents: read
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
