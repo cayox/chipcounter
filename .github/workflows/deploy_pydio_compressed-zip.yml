@@ -9,6 +9,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment: pydio-cells
 
     steps:
       - name: Checkout repository
