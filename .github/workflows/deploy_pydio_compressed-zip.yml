@@ -12,7 +12,7 @@ jobs:
     environment: pydio-cells
 
     permissions:
-      contents: read
+      contents: write
 
     steps:
       - name: Checkout repository
