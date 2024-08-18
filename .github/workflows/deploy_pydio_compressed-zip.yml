@@ -1,4 +1,4 @@
-name: Deploy to Pydio Cells via API
+name: Deploy to Pydio Cells via API (compressed.zip.com)
 
 on:
   push:
@@ -17,9 +17,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-
-      - name: Install cURL
-        run: sudo apt-get install -y curl
 
       - name: Upload files to Pydio Cells
         run: |
