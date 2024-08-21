@@ -7,6 +7,12 @@ from chip_counter.config import CONFIG
 from chip_counter.models.gpio import GPIO
 from chip_counter.models.utils import toggle_backlight
 
+try:
+    # import lgpio on py if possible to catch errors with gpio
+    import lgpio.error
+except ImportError:
+    pass
+
 log = logging.getLogger(__name__)
 
 
@@ -53,21 +59,24 @@ class ButtonSwitchManager(QtCore.QObject):
     @QtCore.pyqtSlot()
     def monitor_inputs(self) -> None:
         """Method to check the inputs of the buttons and switches in an endless loop."""
-        while True:
-            if not GPIO.input(self.button1_pin):
-                self.button1_pressed.emit()
-                log.info("Button1 pressed")
-                time.sleep(0.2)
-            if not GPIO.input(self.button2_pin):
-                self.button2_pressed.emit()
-                log.info("Button2 pressed")
-                time.sleep(0.2)
-            new_switch_state = self.get_switch_state()
-            if new_switch_state != self.switch_state:
-                log.info("New Switch state %s", new_switch_state)
-                self.switch_state = new_switch_state
-                self.switch_changed.emit(self.switch_state)
-            time.sleep(0.1)
+        try:
+            while True:
+                if not GPIO.input(self.button1_pin):
+                    self.button1_pressed.emit()
+                    log.info("Button1 pressed")
+                    time.sleep(0.2)
+                if not GPIO.input(self.button2_pin):
+                    self.button2_pressed.emit()
+                    log.info("Button2 pressed")
+                    time.sleep(0.2)
+                new_switch_state = self.get_switch_state()
+                if new_switch_state != self.switch_state:
+                    log.info("New Switch state %s", new_switch_state)
+                    self.switch_state = new_switch_state
+                    self.switch_changed.emit(self.switch_state)
+                time.sleep(0.1)
+        except lgpio.error:
+            return
 
     def get_switch_state(self) -> int:
         """Method to find out the current state of the switch. Returns -1 if no state was detected."""

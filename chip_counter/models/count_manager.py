@@ -9,6 +9,7 @@ from PyQt6 import QtCore
 
 from chip_counter.config import APP_CONFIG_ROOT, CONFIG
 from chip_counter.models.gpio import GPIO
+from threading import Timer
 
 log = logging.getLogger(__name__)
 
@@ -18,7 +19,7 @@ class CountHistory(pd.DataFrame):
 
     def __init__(self, save_path: str, factor: int | None = None):
         super().__init__(
-            columns=["hour", "blue_chips", "red_chips", "summary", "factor"]
+            columns=["hour", "blue_chips", "red_chips", "summary", "chip_factor"]
         )
 
         self.save_path = save_path
@@ -37,7 +38,7 @@ class CountHistory(pd.DataFrame):
         self.loc[:, "blue_chips"] = 0
         self.loc[:, "red_chips"] = 0
         self.loc[:, "summary"] = 0
-        self.loc[:, "factor"] = self.factor
+        self.loc[:, "chip_factor"] = self.factor
 
     def recalculate_data(self) -> None:
         """Recalculate the data and save it afterwards."""
@@ -50,6 +51,7 @@ class CountHistory(pd.DataFrame):
             return
         df = pd.read_csv(self.save_path)
         df.save_path = self.save_path
+        df._factor = None
         self.__dict__ = deepcopy(df.__dict__)
 
     def save(self) -> None:
@@ -111,13 +113,9 @@ class CountManager(QtCore.QObject):
 
         # timers because they cannot be created outside of a QThread
         # (GPIO Thread of event handler is not such a environment)
-        self.motor1_deactivate_timer = QtCore.QTimer(self)
-        self.motor1_deactivate_timer.setSingleShot(True)
-        self.motor1_deactivate_timer.timeout.connect(self.deactivate_motor1_vibration)
+        self.motor1_deactivate_timer = None
 
-        self.motor2_deactivate_timer = QtCore.QTimer(self)
-        self.motor2_deactivate_timer.setSingleShot(True)
-        self.motor2_deactivate_timer.timeout.connect(self.deactivate_motor1_vibration)
+        self.motor2_deactivate_timer = None
 
         self.timers = []
 
@@ -146,7 +144,8 @@ class CountManager(QtCore.QObject):
         log.debug("Activating motor 1")
         self._motor1_active = True
         GPIO.output(CONFIG.raspberry_pi.motor1_pin, GPIO.HIGH)
-        self.motor1_deactivate_timer.start(CONFIG.counting.motor_duration * 1000)
+        self.motor1_deactivate_timer = Timer(CONFIG.counting.motor_duration, self.deactivate_motor1_vibration)
+        self.motor1_deactivate_timer.start()
         if not CONFIG.counting.seperate_motors:
             self.activate_motor2_vibration()
 
@@ -166,7 +165,8 @@ class CountManager(QtCore.QObject):
         log.debug("Activating motor 2")
         self._motor2_active = True
         GPIO.output(CONFIG.raspberry_pi.motor2_pin, GPIO.HIGH)
-        self.motor1_deactivate_timer.start(CONFIG.counting.motor_duration * 1000)
+        self.motor2_deactivate_timer = Timer(CONFIG.counting.motor_duration, self.deactivate_motor2_vibration)
+        self.motor2_deactivate_timer.start()
         if not CONFIG.counting.seperate_motors:
             self.activate_motor1_vibration()
 
@@ -206,4 +206,3 @@ class CountManager(QtCore.QObject):
         log.info("Loading counting logs")
         self.count_history = CountHistory(save_path=self.COUNT_SAVE_FILE, factor=1)
         self.daily_count_history = CountHistory(save_path=self.DAILY_COUNT_SAVE_FILE)
-        log.debug(self.count_history)

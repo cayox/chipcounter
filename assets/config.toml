@@ -46,7 +46,7 @@ seperate_motors = false
 [raspberry_pi]
 # zeit die ein signal stabil sein muss um erkannt zu werden
 # je niedriger desto schneller die Erkennung aber desto höher ist auch die Fehleranfälligkeit
-sensor_bounce_time = 200  # in ms
+sensor_bounce_time = 300  # in ms
 
 # Sensor zum Zählen von blauen Chips
 count_sensor1_pin = 14
